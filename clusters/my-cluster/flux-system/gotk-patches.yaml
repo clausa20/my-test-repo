@@ -6,5 +6,5 @@ metadata:
 spec:
   decryption:
     provider: sops
-    secretRef:
-      name: sops-kms
+#    secretRef:
+#      name: sops-kms
