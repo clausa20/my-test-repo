@@ -3,5 +3,30 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
-patchesStrategicMerge:
-- gotk-patches.yaml
+#patchesStrategicMerge:
+#- gotk-patches.yaml
+
+ipatchesStrategicMerge:
+- |-
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: kustomize-controller
+    namespace: flux-system
+  spec:
+    template:
+      spec:
+        containers:
+        - name: manager
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            valueFrom:
+              secretKeyRef:
+                name: sops-aws-creds
+                key: access_key_id
+          - name: AWS_SECRET_ACCESS_KEY
+            valueFrom:
+              secretKeyRef:
+                name: sops-aws-creds
+                key: access_key_secret
+
