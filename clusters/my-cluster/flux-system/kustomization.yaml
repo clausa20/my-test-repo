@@ -6,7 +6,7 @@ resources:
 #patchesStrategicMerge:
 #- gotk-patches.yaml
 
-ipatchesStrategicMerge:
+patchesStrategicMerge:
 - |-
   apiVersion: apps/v1
   kind: Deployment
